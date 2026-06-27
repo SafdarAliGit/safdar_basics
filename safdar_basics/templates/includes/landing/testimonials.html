@@ -1,0 +1,29 @@
+<section class="ds-section ds-testimonials" id="about" aria-labelledby="testimonialsHeading">
+  <div class="ds-container">
+    <div class="ds-section__header">
+      <span class="ds-badge">Testimonials</span>
+      <h2 class="ds-section__title" id="testimonialsHeading">
+        Loved by Beauty <span class="ds-gradient-text">Businesses</span>
+      </h2>
+      <p class="ds-section__subtitle">Join hundreds of successful brands using our platform</p>
+    </div>
+
+    <div class="ds-testimonials__grid">
+      {% for t in testimonials %}
+      <article class="ds-testimonial-card ds-reveal" style="animation-delay: {{ loop.index0 * 100 }}ms">
+        <div class="ds-testimonial-card__stars" aria-label="{{ t.rating }} out of 5 stars">
+          {% for i in range(t.rating) %}<i class="fas fa-star" aria-hidden="true"></i>{% endfor %}
+        </div>
+        <blockquote class="ds-testimonial-card__quote">{{ t.text }}</blockquote>
+        <div class="ds-testimonial-card__author">
+          <div class="ds-testimonial-card__avatar" aria-hidden="true">{{ t.avatar }}</div>
+          <div class="ds-testimonial-card__meta">
+            <div class="ds-testimonial-card__name">{{ t.name }}</div>
+            <div class="ds-testimonial-card__role">{{ t.role }}</div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

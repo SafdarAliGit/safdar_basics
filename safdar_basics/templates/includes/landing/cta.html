@@ -1,0 +1,38 @@
+<section class="ds-cta" id="contact" aria-labelledby="ctaHeading">
+  <div class="ds-cta__bg" aria-hidden="true">
+    <div class="ds-cta__orb ds-cta__orb--1"></div>
+    <div class="ds-cta__orb ds-cta__orb--2"></div>
+  </div>
+  <div class="ds-container">
+    <div class="ds-cta__content">
+      <span class="ds-badge ds-badge--light">Ready to Start?</span>
+      <h2 class="ds-cta__title" id="ctaHeading">
+        Transform Your Beauty <span class="ds-accent-text">Today</span>
+      </h2>
+      <p class="ds-cta__subtitle">
+        Join hundreds of brands already growing with DermaShine ERP.
+        No setup fees. Cancel anytime.
+      </p>
+      <div class="ds-cta__actions">
+        {% if is_logged_in %}
+        <a href="/app" class="ds-btn ds-btn--cta-primary">
+          <i class="fas fa-rocket" aria-hidden="true"></i> Go to Dashboard
+        </a>
+        {% else %}
+        <button class="ds-btn ds-btn--cta-primary" id="ctaLoginBtn">
+          <i class="fas fa-rocket" aria-hidden="true"></i> Start Free Trial
+        </button>
+        {% endif %}
+        <a href="#features" class="ds-btn ds-btn--cta-secondary">
+          <i class="fas fa-play-circle" aria-hidden="true"></i> See All Features
+        </a>
+      </div>
+      <ul class="ds-cta__trust" role="list">
+        <li><i class="fas fa-shield-halved" aria-hidden="true"></i> Enterprise Security</li>
+        <li><i class="fas fa-headset" aria-hidden="true"></i> 24/7 Support</li>
+        <li><i class="fas fa-infinity" aria-hidden="true"></i> Unlimited Access</li>
+        <li><i class="fas fa-rotate" aria-hidden="true"></i> 99.9% Uptime SLA</li>
+      </ul>
+    </div>
+  </div>
+</section>

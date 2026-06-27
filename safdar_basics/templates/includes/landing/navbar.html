@@ -1,0 +1,24 @@
+<nav class="ds-navbar" id="mainNavbar" role="navigation" aria-label="Main navigation">
+  <div class="ds-navbar__inner">
+
+    <a class="ds-navbar__brand" href="/" aria-label="DermaShine home">
+      <img src="/assets/safdar_basics/images/logo.png" alt="DermaShine" class="ds-navbar__logo-img">
+    </a>
+
+    <div class="ds-navbar__actions">
+      {% if is_logged_in %}
+      <a href="/app" class="ds-btn ds-btn--primary ds-btn--sm">
+        <i class="fas fa-gauge-high" aria-hidden="true"></i> Staff Area
+      </a>
+      <button class="ds-btn ds-btn--ghost ds-btn--sm" id="logoutBtn" aria-label="Logout">
+        <i class="fas fa-arrow-right-from-bracket" aria-hidden="true"></i> Logout
+      </button>
+      {% else %}
+      <button class="ds-btn ds-btn--primary ds-btn--sm" id="navLoginBtn" aria-label="Open login">
+        <i class="fas fa-arrow-right-to-bracket" aria-hidden="true"></i> Login
+      </button>
+      {% endif %}
+    </div>
+
+  </div>
+</nav>

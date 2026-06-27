@@ -1,0 +1,103 @@
+<!-- LIGHTBOX -->
+<div class="ds-lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product Image Viewer" aria-hidden="true">
+  <div class="ds-lightbox__overlay" id="lightboxOverlay"></div>
+  <div class="ds-lightbox__body">
+    <button class="ds-lightbox__close" id="lightboxClose" aria-label="Close lightbox">
+      <i class="fas fa-xmark" aria-hidden="true"></i>
+    </button>
+    <button class="ds-lightbox__nav ds-lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">
+      <i class="fas fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <div class="ds-lightbox__img-wrap">
+      <img src="" alt="" id="lightboxImg" class="ds-lightbox__img">
+    </div>
+    <button class="ds-lightbox__nav ds-lightbox__nav--next" id="lightboxNext" aria-label="Next image">
+      <i class="fas fa-chevron-right" aria-hidden="true"></i>
+    </button>
+    <div class="ds-lightbox__caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="ds-login-modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle" aria-hidden="true">
+  <div class="ds-login-modal__overlay" id="loginOverlay"></div>
+  <div class="ds-login-modal__card">
+    <button class="ds-login-modal__close" id="loginClose" aria-label="Close login modal">
+      <i class="fas fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <div class="ds-login-modal__header">
+      <img src="/assets/safdar_basics/images/logo.png" alt="DermaShine" class="ds-login-modal__logo">
+      <h2 class="ds-login-modal__title" id="loginModalTitle">Welcome Back</h2>
+      <p class="ds-login-modal__subtitle">Sign in to your {{ company_name }} account</p>
+    </div>
+
+    <form class="ds-login-form" id="loginForm" novalidate aria-label="Login form">
+
+      <div class="ds-field" id="userFieldWrap">
+        <div class="ds-field__inner">
+          <i class="fas fa-user ds-field__icon" aria-hidden="true"></i>
+          <input
+            type="text"
+            id="loginUser"
+            name="usr"
+            class="ds-field__input"
+            placeholder=" "
+            autocomplete="username"
+            required
+            aria-required="true"
+            aria-describedby="userError"
+          >
+          <label class="ds-field__label" for="loginUser">Email or Username</label>
+        </div>
+        <div class="ds-field__error" id="userError" role="alert" aria-live="polite"></div>
+      </div>
+
+      <div class="ds-field" id="passFieldWrap">
+        <div class="ds-field__inner">
+          <i class="fas fa-lock ds-field__icon" aria-hidden="true"></i>
+          <input
+            type="password"
+            id="loginPass"
+            name="pwd"
+            class="ds-field__input"
+            placeholder=" "
+            autocomplete="current-password"
+            required
+            aria-required="true"
+            aria-describedby="passError"
+          >
+          <label class="ds-field__label" for="loginPass">Password</label>
+          <button type="button" class="ds-field__toggle-pass" id="togglePass" aria-label="Toggle password visibility">
+            <i class="fas fa-eye" id="passEyeIcon" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="ds-field__error" id="passError" role="alert" aria-live="polite"></div>
+      </div>
+
+      <div class="ds-login-form__options">
+        <label class="ds-checkbox">
+          <input type="checkbox" id="rememberMe" class="ds-checkbox__input">
+          <span class="ds-checkbox__mark" aria-hidden="true"></span>
+          <span class="ds-checkbox__label">Remember me</span>
+        </label>
+        <a href="/update-password" class="ds-login-form__forgot">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="ds-btn ds-btn--login" id="loginSubmit">
+        <span class="ds-btn--login__text" id="loginBtnText">Sign In</span>
+        <span class="ds-btn--login__spinner" id="loginSpinner" hidden aria-hidden="true">
+          <span class="ds-spinner"></span>
+        </span>
+      </button>
+
+    </form>
+
+    <p class="ds-login-modal__footer">
+      Powered by <strong>Sky Node</strong>
+    </p>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="ds-toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>

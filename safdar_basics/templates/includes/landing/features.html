@@ -1,0 +1,28 @@
+<section class="ds-section ds-features" id="features" aria-labelledby="featuresHeading">
+  <div class="ds-features__bg" aria-hidden="true">
+    <div class="ds-features__orb"></div>
+  </div>
+  <div class="ds-container">
+    <div class="ds-section__header ds-section__header--light">
+      <span class="ds-badge ds-badge--light">ERP Features</span>
+      <h2 class="ds-section__title ds-section__title--light" id="featuresHeading">
+        Everything You Need to <span class="ds-accent-text">Grow</span>
+      </h2>
+      <p class="ds-section__subtitle ds-section__subtitle--light">
+        Powerful tools built specifically for beauty &amp; cosmetics businesses
+      </p>
+    </div>
+
+    <div class="ds-features__grid">
+      {% for feature in features %}
+      <div class="ds-feature-card ds-reveal" style="animation-delay: {{ (loop.index0 % 4) * 80 }}ms">
+        <div class="ds-feature-card__icon-wrap">
+          <i class="{{ feature.icon }}" aria-hidden="true"></i>
+        </div>
+        <h3 class="ds-feature-card__title">{{ feature.title }}</h3>
+        <p class="ds-feature-card__desc">{{ feature.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

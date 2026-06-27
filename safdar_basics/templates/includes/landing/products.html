@@ -1,0 +1,44 @@
+<section class="ds-section ds-products" id="products" aria-labelledby="productsHeading">
+  <div class="ds-container">
+    <div class="ds-section__header">
+      <span class="ds-badge">Our Collection</span>
+      <h2 class="ds-section__title" id="productsHeading">
+        Premium Beauty <span class="ds-gradient-text">Products</span>
+      </h2>
+      <p class="ds-section__subtitle">Curated selection of luxury cosmetics and skincare solutions</p>
+    </div>
+
+    <div class="ds-products__grid" id="productsGrid">
+      {% for product in products %}
+      <article class="ds-product-card ds-reveal" data-delay="{{ (loop.index0 % 4) * 80 }}">
+        <div class="ds-product-card__img-wrap">
+          <img
+            src="{{ product.src }}"
+            alt="{{ product.alt }}"
+            loading="lazy"
+            width="400"
+            height="400"
+            class="ds-product-card__img"
+            decoding="async"
+          >
+          <div class="ds-product-card__overlay">
+            <button
+              class="ds-product-card__lightbox-btn"
+              data-src="{{ product.src }}"
+              data-alt="{{ product.alt }}"
+              data-index="{{ loop.index0 }}"
+              aria-label="View {{ product.alt }} in fullscreen"
+            >
+              <i class="fas fa-expand" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="ds-product-card__footer">
+          <span class="ds-product-card__caption">{{ product.alt }}</span>
+          <span class="ds-product-card__cat-tag">{{ product.category }}</span>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

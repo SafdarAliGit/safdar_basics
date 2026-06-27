@@ -1,0 +1,12 @@
+<section class="ds-stats" aria-label="Statistics">
+  <div class="ds-container">
+    <div class="ds-stats__grid">
+      {% for stat in stats %}
+      <div class="ds-stat-item ds-reveal">
+        <div class="ds-stat-item__num js-counter" data-target="{{ stat.number }}">{{ stat.number }}</div>
+        <div class="ds-stat-item__label">{{ stat.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

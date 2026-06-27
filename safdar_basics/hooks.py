@@ -16,6 +16,9 @@ doc_events = {
     }
 }
 
+# Landing page as website home
+home_page = "index"
+
 # Apps
 # ------------------
 
