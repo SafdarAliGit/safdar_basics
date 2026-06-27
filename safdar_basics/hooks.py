@@ -5,6 +5,17 @@ app_description = "for customizations"
 app_email = "safdar211@gmail.com"
 app_license = "mit"
 
+fixtures = ["Custom Field"]
+
+doc_events = {
+    "Sales Invoice": {
+        "before_save": "safdar_basics.overrides.calculate_fields.before_save"
+    },
+    "Sales Order": {
+        "before_save": "safdar_basics.overrides.calculate_fields.before_save"
+    }
+}
+
 # Apps
 # ------------------
 

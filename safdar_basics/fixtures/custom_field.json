@@ -1,0 +1,173 @@
+[
+  {
+    "doctype": "Custom Field",
+    "name": "Item-hs_code",
+    "dt": "Item",
+    "fieldname": "hs_code",
+    "label": "HS Code",
+    "fieldtype": "Data",
+    "insert_after": "item_name"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice Item-hs_code",
+    "dt": "Sales Invoice Item",
+    "fieldname": "hs_code",
+    "label": "HS Code",
+    "fieldtype": "Data",
+    "fetch_from": "item_code.hs_code",
+    "fetch_if_empty": 0,
+    "in_list_view": 1,
+    "insert_after": "item_name"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order Item-hs_code",
+    "dt": "Sales Order Item",
+    "fieldname": "hs_code",
+    "label": "HS Code",
+    "fieldtype": "Data",
+    "fetch_from": "item_code.hs_code",
+    "fetch_if_empty": 0,
+    "in_list_view": 1,
+    "insert_after": "item_name"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice Item-sb_base_amount",
+    "dt": "Sales Invoice Item",
+    "fieldname": "sb_base_amount",
+    "label": "Base Amount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "net_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice Item-total_discount",
+    "dt": "Sales Invoice Item",
+    "fieldname": "total_discount",
+    "label": "Total Discount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "sb_base_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice Item-sales_tax",
+    "dt": "Sales Invoice Item",
+    "fieldname": "sales_tax",
+    "label": "Sales Tax",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "total_discount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order Item-sb_base_amount",
+    "dt": "Sales Order Item",
+    "fieldname": "sb_base_amount",
+    "label": "Base Amount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "net_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order Item-total_discount",
+    "dt": "Sales Order Item",
+    "fieldname": "total_discount",
+    "label": "Total Discount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "sb_base_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order Item-sales_tax",
+    "dt": "Sales Order Item",
+    "fieldname": "sales_tax",
+    "label": "Sales Tax",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "in_list_view": 1,
+    "insert_after": "total_discount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice-total_basic_amount",
+    "dt": "Sales Invoice",
+    "fieldname": "total_basic_amount",
+    "label": "Total Basic Amount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "net_total"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice-total_discount",
+    "dt": "Sales Invoice",
+    "fieldname": "total_discount",
+    "label": "Total Discount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "total_basic_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Invoice-total_sales_tax",
+    "dt": "Sales Invoice",
+    "fieldname": "total_sales_tax",
+    "label": "Total Sales Tax",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "total_discount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order-total_basic_amount",
+    "dt": "Sales Order",
+    "fieldname": "total_basic_amount",
+    "label": "Total Basic Amount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "net_total"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order-total_discount",
+    "dt": "Sales Order",
+    "fieldname": "total_discount",
+    "label": "Total Discount",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "total_basic_amount"
+  },
+  {
+    "doctype": "Custom Field",
+    "name": "Sales Order-total_sales_tax",
+    "dt": "Sales Order",
+    "fieldname": "total_sales_tax",
+    "label": "Total Sales Tax",
+    "fieldtype": "Currency",
+    "options": "currency",
+    "read_only": 1,
+    "insert_after": "total_discount"
+  }
+]
