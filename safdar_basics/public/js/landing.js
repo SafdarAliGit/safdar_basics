@@ -228,6 +228,17 @@
       if (btn) btn.addEventListener('click', openModal);
     });
 
+    function syncFieldLabel(input) {
+      if (!input) return;
+      input.classList.toggle('has-value', !!input.value);
+    }
+
+    [userInput, passInput].forEach(input => {
+      if (!input) return;
+      input.addEventListener('input', () => syncFieldLabel(input));
+      input.addEventListener('change', () => syncFieldLabel(input));
+    });
+
     function openModal() {
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
@@ -238,6 +249,7 @@
       const remembered = localStorage.getItem('ds_remember_user');
       if (remembered && userInput) {
         userInput.value = remembered;
+        syncFieldLabel(userInput);
         if (rememberMe) rememberMe.checked = true;
       }
     }

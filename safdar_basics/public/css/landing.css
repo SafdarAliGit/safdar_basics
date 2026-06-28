@@ -43,7 +43,7 @@
   --ds-grad-accent:     linear-gradient(135deg, #f4abbd, #c9a96e);
   --ds-grad-stats:      linear-gradient(135deg, #4a1868 0%, #6b1a8a 100%);
   --ds-grad-cta:        linear-gradient(160deg, #1a0a2e 0%, #4a1868 50%, #6b1a8a 100%);
-  --ds-grad-footer:     linear-gradient(160deg, #0a0114, #1a0a2e);
+  --ds-grad-footer:     linear-gradient(160deg, #1d0a2d 0%, #260f43 40%, #3a175d 100%);
 
   /* Glass */
   --ds-glass-bg:     rgba(255, 255, 255, 0.06);
@@ -765,7 +765,7 @@ input, button, textarea {
 
 .ds-hero__subtitle {
   font-size: clamp(1rem, 1.5vw, 1.125rem);
-  color: rgba(255, 255, 255, 0.7);
+  color: #fff;
   max-width: 480px;
   line-height: 1.75;
 }
@@ -1623,7 +1623,7 @@ input, button, textarea {
 
 .ds-footer__desc {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: #fff;
   line-height: 1.75;
   margin-bottom: 1.5rem;
 }
@@ -1643,7 +1643,7 @@ input, button, textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: #fff;
   font-size: 0.875rem;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
@@ -1668,7 +1668,7 @@ input, button, textarea {
   align-items: flex-start;
   gap: 0.6rem;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: #fff;
   line-height: 1.5;
 }
 
@@ -1688,7 +1688,7 @@ input, button, textarea {
 }
 
 .ds-footer__contact-item a {
-  color: rgba(255, 255, 255, 0.55);
+  color: #fff;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -1714,7 +1714,7 @@ input, button, textarea {
 }
 
 .ds-footer__links a {
-  color: rgba(255, 255, 255, 0.45);
+  color: #fff;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
@@ -1738,20 +1738,9 @@ input, button, textarea {
 
 .ds-footer__copy {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: #fff;
 }
 
-.ds-footer__powered {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.45);
-  letter-spacing: 0.01em;
-}
-
-.ds-footer__powered strong {
-  color: #c084fc;
-  font-weight: 700;
-  text-shadow: 0 0 12px rgba(192, 132, 252, 0.6);
-}
 
 .ds-footer__legal {
   display: flex;
@@ -1760,12 +1749,51 @@ input, button, textarea {
 
 .ds-footer__legal a {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.35);
+  color: #fff;
   transition: color 0.2s;
 }
 
 .ds-footer__legal a:hover {
   color: rgba(255, 255, 255, 0.75);
+}
+
+.ds-devbar {
+  background: var(--ds-grad-footer);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 0.6rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ds-devbar__label {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.8rem;
+}
+
+.ds-devbar__name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.ds-devbar__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #fff;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ds-devbar__link:hover {
+  color: #fff;
+}
+
+.ds-devbar__link i {
+  font-size: 0.7rem;
 }
 
 /* ================================================================
@@ -2068,8 +2096,10 @@ input, button, textarea {
 }
 
 .ds-field__input:focus + .ds-field__label,
-.ds-field__input:not(:placeholder-shown) + .ds-field__label {
-  transform: translateY(-0.6rem) scale(0.75);
+.ds-field__input:not(:placeholder-shown) + .ds-field__label,
+.ds-field__input.has-value + .ds-field__label,
+.ds-field__input:-webkit-autofill + .ds-field__label {
+  transform: translateY(-1.5rem) scale(0.75);
   color: var(--ds-purple-600);
 }
 
@@ -2086,7 +2116,7 @@ input, button, textarea {
   font-size: 0.9rem;
   pointer-events: none;
   transition: transform 0.2s var(--ds-ease), color 0.2s, font-size 0.2s;
-  transform-origin: left center;
+  transform-origin: left top;
   white-space: nowrap;
 }
 
