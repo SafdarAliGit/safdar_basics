@@ -14,9 +14,21 @@ doc_events = {
             # "safdar_basics.overrides.calculate_fields.before_save",
         ]
     },
-    # "Sales Order": {
-    #     "before_save": "safdar_basics.overrides.calculate_fields.before_save"
-    # }
+    "Sales Order": {
+        "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
+    },
+    "Delivery Note": {
+        "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
+    },
+    "Purchase Order": {
+        "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
+    },
+    "Purchase Receipt": {
+        "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
+    },
+    "Purchase Invoice": {
+        "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
+    },
 }
 
 regional_overrides = {

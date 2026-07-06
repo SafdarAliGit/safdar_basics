@@ -2,6 +2,19 @@ import json
 
 import frappe
 
+#: Doctypes wired to validate()/get_itemised_tax_breakup_data() in hooks.py.
+#: Their items/taxes child tables share the same relevant fieldnames
+#: (price_list_rate, net_rate, item_tax_rate, tax_amount, ...), so one
+#: implementation covers all of them.
+TAX_ON_PRICE_LIST_RATE_DOCTYPES = (
+	"Sales Invoice",
+	"Sales Order",
+	"Delivery Note",
+	"Purchase Order",
+	"Purchase Receipt",
+	"Purchase Invoice",
+)
+
 
 def _get_item_tax_rate(item, tax):
 	"""Mirrors erpnext.controllers.taxes_and_totals.TaxesAndTotalsMixin._get_tax_rate:
@@ -53,6 +66,9 @@ def validate(doc, method=None):
 	"""When enabled in My Settings, charge 'On Net Total' taxes on each item's
 	price_list_rate (the pre-discount list price), regardless of any
 	line-item discount applied. Otherwise, leave taxes untouched.
+
+	Shared across all TAX_ON_PRICE_LIST_RATE_DOCTYPES (see hooks.py doc_events) -
+	doctype-agnostic, so no per-doctype branching is needed here.
 
 	'Is this Tax included in Basic Rate?' (included_in_print_rate) still works,
 	re-based on price_list_rate instead of the discounted rate:
@@ -200,12 +216,20 @@ def get_itemised_tax_breakup_data(doc):
 	get_itemised_tax_breakup_data. Reuses the item_wise_tax_detail already
 	rebuilt by validate() above, but also swaps the "Taxable Amount" column
 	from item.net_amount to the price_list_rate based tax basis so it lines up
-	with the tax actually charged."""
+	with the tax actually charged.
+
+	This is the single function registered for this method across all
+	countries/doctypes (regional_overrides only allows one override per
+	dotted method path), so it must explicitly gate on
+	TAX_ON_PRICE_LIST_RATE_DOCTYPES rather than assuming Sales Invoice."""
 	from erpnext.controllers.taxes_and_totals import get_itemised_tax, get_itemised_taxable_amount
 
 	itemised_tax = get_itemised_tax(doc.taxes)
 
-	if doc.doctype == "Sales Invoice" and frappe.get_cached_doc("My Settings").tax_on_price_list_rate:
+	if (
+		doc.doctype in TAX_ON_PRICE_LIST_RATE_DOCTYPES
+		and frappe.get_cached_doc("My Settings").tax_on_price_list_rate
+	):
 		_, _, tax_basis, _, _, _ = _price_list_tax_bases(doc)
 		itemised_taxable_amount = frappe._dict()
 		for item in doc.items:
