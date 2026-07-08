@@ -11,7 +11,7 @@ doc_events = {
     "Sales Invoice": {
         "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
         "before_save": [
-            # "safdar_basics.overrides.calculate_fields.before_save",
+            "safdar_basics.overrides.calculate_fields.before_save",
         ]
     },
     "Sales Order": {
