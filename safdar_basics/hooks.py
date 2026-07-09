@@ -29,6 +29,9 @@ doc_events = {
     "Purchase Invoice": {
         "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
     },
+    "Customer": {
+        "before_save": "safdar_basics.overrides.set_sales_person.before_save",
+    },
 }
 
 regional_overrides = {
