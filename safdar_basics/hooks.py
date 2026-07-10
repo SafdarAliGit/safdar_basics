@@ -12,7 +12,8 @@ doc_events = {
         "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
         "before_save":"safdar_basics.overrides.calculate_fields.before_save",
         "before_save": "safdar_basics.overrides.sales_invoice.set_sales_invoice_ref_on_sales_order",
-        "on_cancel": "safdar_basics.overrides.sales_invoice.clear_sales_invoice_ref_on_sales_order"
+        "on_cancel": "safdar_basics.overrides.sales_invoice.clear_sales_invoice_ref_on_sales_order",
+        "before_insert": "safdar_basics.overrides.sales_invoice.update_checks_when_is_return",
     },
     "Sales Order": {
         "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
@@ -84,7 +85,7 @@ home_page = "index"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"Payment Entry" : "public/js/payment_entry.js"}
+doctype_js = {"Sales Invoice" : "public/js/sales_invoice.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}

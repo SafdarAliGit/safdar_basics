@@ -32,3 +32,8 @@ def _update_sales_order_ref(doc, value):
             'sales_invoice',
             value
         )
+
+def update_checks_when_is_return(doc, method):
+    if doc.is_return:
+        doc.update_billed_amount_in_delivery_note = 0
+        doc.update_outstanding_for_self = 0
