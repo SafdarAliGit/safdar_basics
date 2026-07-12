@@ -10,7 +10,6 @@ fixtures = ["Custom Field"]
 doc_events = {
     "Sales Invoice": {
         "validate": "safdar_basics.overrides.tax_on_price_list_rate.validate",
-        "before_save":"safdar_basics.overrides.calculate_fields.before_save",
         "before_save": "safdar_basics.overrides.sales_invoice.set_sales_invoice_ref_on_sales_order",
         "on_cancel": "safdar_basics.overrides.sales_invoice.clear_sales_invoice_ref_on_sales_order",
         "before_insert": "safdar_basics.overrides.sales_invoice.update_checks_when_is_return",
