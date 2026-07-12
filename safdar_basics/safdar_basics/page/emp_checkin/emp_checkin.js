@@ -470,6 +470,10 @@ class EmpCheckinPage {
             fieldtype: "Link", fieldname: "employee", label: __("Employee"),
             options: "Employee", change: () => this.refresh(),
         });
+        this.f_company = mk("ec-f-company", {
+            fieldtype: "Link", fieldname: "company", label: __("Company"),
+            options: "Company", change: () => this.refresh(),
+        });
         this.f_dept = mk("ec-f-dept", {
             fieldtype: "Link", fieldname: "department", label: __("Department"),
             options: "Department", change: () => this.refresh(),
@@ -499,6 +503,7 @@ class EmpCheckinPage {
         this.f_from.set_value(frappe.datetime.add_days(frappe.datetime.get_today(), -1));
         this.f_to.set_value(frappe.datetime.get_today());
         this.f_emp.set_value("");
+        this.f_company.set_value("");
         this.f_dept.set_value("");
         this.f_desig.set_value("");
         this.f_shift.set_value("");
@@ -528,6 +533,7 @@ class EmpCheckinPage {
                     <div class="ec-f-item" id="ec-f-from"></div>
                     <div class="ec-f-item" id="ec-f-to"></div>
                     <div class="ec-f-item" id="ec-f-emp"></div>
+                    <div class="ec-f-item" id="ec-f-company"></div>
                     <div class="ec-f-item" id="ec-f-dept"></div>
                     <div class="ec-f-item" id="ec-f-desig"></div>
                     <div class="ec-f-item" id="ec-f-shift"></div>
@@ -553,6 +559,7 @@ class EmpCheckinPage {
             from_date:   this.f_from.get_value(),
             to_date:     this.f_to.get_value(),
             employee:    this.f_emp.get_value(),
+            company:     this.f_company.get_value(),
             department:  this.f_dept.get_value(),
             designation: this.f_desig.get_value(),
             shift:       this.f_shift.get_value(),
@@ -935,6 +942,7 @@ class EmpCheckinPage {
             filters.from_date   ? `<span class="b">From: ${this._fmt_date(filters.from_date)}</span>` : "",
             filters.to_date     ? `<span class="b">To: ${this._fmt_date(filters.to_date)}</span>` : "",
             filters.employee    ? `<span class="b">${filters.employee}</span>` : "",
+            filters.company     ? `<span class="b">${filters.company}</span>` : "",
             filters.department  ? `<span class="b">${filters.department}</span>` : "",
             filters.designation ? `<span class="b">${filters.designation}</span>` : "",
             filters.shift       ? `<span class="b">Shift: ${filters.shift}</span>` : "",
