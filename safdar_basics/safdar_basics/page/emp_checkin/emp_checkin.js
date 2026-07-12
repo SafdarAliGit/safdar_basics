@@ -474,6 +474,10 @@ class EmpCheckinPage {
             fieldtype: "Link", fieldname: "company", label: __("Company"),
             options: "Company", change: () => this.refresh(),
         });
+        this.f_branch = mk("ec-f-branch", {
+            fieldtype: "Link", fieldname: "branch", label: __("Branch"),
+            options: "Branch", change: () => this.refresh(),
+        });
         this.f_dept = mk("ec-f-dept", {
             fieldtype: "Link", fieldname: "department", label: __("Department"),
             options: "Department", change: () => this.refresh(),
@@ -504,6 +508,7 @@ class EmpCheckinPage {
         this.f_to.set_value(frappe.datetime.get_today());
         this.f_emp.set_value("");
         this.f_company.set_value("");
+        this.f_branch.set_value("");
         this.f_dept.set_value("");
         this.f_desig.set_value("");
         this.f_shift.set_value("");
@@ -534,6 +539,7 @@ class EmpCheckinPage {
                     <div class="ec-f-item" id="ec-f-to"></div>
                     <div class="ec-f-item" id="ec-f-emp"></div>
                     <div class="ec-f-item" id="ec-f-company"></div>
+                    <div class="ec-f-item" id="ec-f-branch"></div>
                     <div class="ec-f-item" id="ec-f-dept"></div>
                     <div class="ec-f-item" id="ec-f-desig"></div>
                     <div class="ec-f-item" id="ec-f-shift"></div>
@@ -560,6 +566,7 @@ class EmpCheckinPage {
             to_date:     this.f_to.get_value(),
             employee:    this.f_emp.get_value(),
             company:     this.f_company.get_value(),
+            branch:      this.f_branch.get_value(),
             department:  this.f_dept.get_value(),
             designation: this.f_desig.get_value(),
             shift:       this.f_shift.get_value(),
@@ -943,6 +950,7 @@ class EmpCheckinPage {
             filters.to_date     ? `<span class="b">To: ${this._fmt_date(filters.to_date)}</span>` : "",
             filters.employee    ? `<span class="b">${filters.employee}</span>` : "",
             filters.company     ? `<span class="b">${filters.company}</span>` : "",
+            filters.branch      ? `<span class="b">${filters.branch}</span>` : "",
             filters.department  ? `<span class="b">${filters.department}</span>` : "",
             filters.designation ? `<span class="b">${filters.designation}</span>` : "",
             filters.shift       ? `<span class="b">Shift: ${filters.shift}</span>` : "",
