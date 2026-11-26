@@ -22,6 +22,7 @@ frappe.query_reports["My Item-wise Sales Register"] = {
 			label: __("Customer Group"),
 			fieldtype: "Link",
 			options: "Customer Group",
+			reqd: 1,
 		},
 		{
 			fieldname: "customer",

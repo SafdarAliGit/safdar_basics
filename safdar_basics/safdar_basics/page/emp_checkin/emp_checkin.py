@@ -17,6 +17,7 @@ def get_checkin_data(filters):
         filters = json.loads(filters)
 
     filters = dict(filters)
+    _validate_mandatory(filters)
     conditions = _get_conditions(filters)
     having = _get_having(filters)
 
@@ -97,10 +98,9 @@ def get_absent_employees(filters):
         filters = json.loads(filters)
 
     filters = dict(filters)
+    _validate_mandatory(filters)
     from_date = filters.get("from_date")
     to_date   = filters.get("to_date")
-    if not from_date or not to_date:
-        return []
 
     emp_cond = ""
     if filters.get("employee"):
@@ -171,6 +171,14 @@ def get_absent_employees(filters):
 
 
 # ── private helpers ──────────────────────────────────────────────────────────
+
+_MANDATORY_FILTERS = (("from_date", "From Date"), ("to_date", "To Date"), ("department", "Department"))
+
+
+def _validate_mandatory(filters):
+    missing = [_(label) for key, label in _MANDATORY_FILTERS if not filters.get(key)]
+    if missing:
+        frappe.throw(_("Mandatory filters missing: {0}").format(", ".join(missing)))
 
 def _get_conditions(filters):
     c = ""

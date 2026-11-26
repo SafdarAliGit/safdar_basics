@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2026-07-16 18:29:21.767582",
+ "modified": "2026-11-26 12:29:58.270542",
  "modified_by": "Administrator",
  "module": "Safdar Basics",
  "name": "My General Ledger",
@@ -30,16 +30,31 @@
    "role": "Auditor"
   },
   {
-   "role": "Sales Person L2"
+   "role": "Reports 1"
   },
   {
-   "role": "Sales Person L3"
+   "role": "Reports 2"
+  },
+  {
+   "role": "Reports 3"
+  },
+  {
+   "role": "Distributor KPO L1"
   },
   {
    "role": "Distributor KPO L2"
   },
   {
-   "role": "Distributor KPO L3"
+   "role": "Distributor L3"
+  },
+  {
+   "role": "Sales Person L1"
+  },
+  {
+   "role": "Sales Person L2"
+  },
+  {
+   "role": "Sales Person L3"
   }
  ],
  "timeout": 0

@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2026-07-28 13:27:20.720246",
+ "modified": "2026-11-26 12:34:07.896657",
  "modified_by": "Administrator",
  "module": "Safdar Basics",
  "name": "My Warehouse wise Item Balance Age and Value",
@@ -31,22 +31,33 @@
   },
   {
    "role": "Sales User"
-  }
-  ,
+  },
   {
-   "role": "Auditor"
+   "role": "Reports 1"
+  },
+  {
+   "role": "Reports 2"
+  },
+  {
+   "role": "Reports 3"
+  },
+  {
+   "role": "Distributor KPO L1"
+  },
+  {
+   "role": "Distributor KPO L2"
+  },
+  {
+   "role": "Distributor L3"
+  },
+  {
+   "role": "Sales Person L1"
   },
   {
    "role": "Sales Person L2"
   },
   {
    "role": "Sales Person L3"
-  },
-  {
-   "role": "Distributor KPO L2"
-  },
-  {
-   "role": "Distributor KPO L3"
   }
  ],
  "timeout": 0

@@ -71,6 +71,7 @@ frappe.query_reports["My Sales Analytics"] = {
 			label: __("Market Segment"),
 			fieldtype: "Link",
 			options: "Market Segment",
+			reqd: 1,
 		},
 		{
 			fieldname: "industry",

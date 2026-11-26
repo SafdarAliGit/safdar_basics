@@ -402,6 +402,8 @@ frappe.pages["emp-checkin"].on_page_show = function (wrapper) {
 })();
 
 // ── Page class ───────────────────────────────────────────────────────────────
+const EC_DEFAULT_DEPARTMENT = "LipCara Sales - LC";
+
 class EmpCheckinPage {
     constructor(wrapper) {
         this.wrapper    = wrapper;
@@ -412,11 +414,13 @@ class EmpCheckinPage {
         this._sort_dir   = "desc";
         this._cache      = null;
         this._init_mode  = false;
+        this._req_id     = 0;
+        this._refresh_timer = null;
         this._expand_width();
         this._setup_actions();
         this._render_skeleton();
-        this._setup_filters();
-        this.refresh();
+        // Load immediately once default filter values are actually set
+        this._setup_filters().then(() => this.refresh());
     }
 
     on_show() {
@@ -446,7 +450,9 @@ class EmpCheckinPage {
     // ── Filters (rendered inside page body) ────────────────────────────────
     _setup_filters() {
         // Suppress refresh() calls triggered by set_value during init
+        // (Link set_value is async, so we wait for all of them below)
         this._init_mode = true;
+        const pending = [];
 
         const mk = (id, df) => frappe.ui.form.make_control({
             parent: document.getElementById(id),
@@ -456,15 +462,15 @@ class EmpCheckinPage {
 
         this.f_from = mk("ec-f-from", {
             fieldtype: "Date", fieldname: "from_date", label: __("From Date"),
-            change: () => this.refresh(),
+            reqd: 1, change: () => this.refresh(),
         });
-        this.f_from.set_value(frappe.datetime.add_days(frappe.datetime.get_today(), -1));
+        pending.push(this.f_from.set_value(frappe.datetime.add_days(frappe.datetime.get_today(), -1)));
 
         this.f_to = mk("ec-f-to", {
             fieldtype: "Date", fieldname: "to_date", label: __("To Date"),
-            change: () => this.refresh(),
+            reqd: 1, change: () => this.refresh(),
         });
-        this.f_to.set_value(frappe.datetime.get_today());
+        pending.push(this.f_to.set_value(frappe.datetime.get_today()));
 
         this.f_emp = mk("ec-f-emp", {
             fieldtype: "Link", fieldname: "employee", label: __("Employee"),
@@ -480,9 +486,9 @@ class EmpCheckinPage {
         });
         this.f_dept = mk("ec-f-dept", {
             fieldtype: "Link", fieldname: "department", label: __("Department"),
-            options: "Department", change: () => this.refresh(),
+            options: "Department", reqd: 1, change: () => this.refresh(),
         });
-        this.f_dept.set_value("LipCara Sales - LC");
+        pending.push(this.f_dept.set_value(EC_DEFAULT_DEPARTMENT));
         this.f_desig = mk("ec-f-desig", {
             fieldtype: "Link", fieldname: "designation", label: __("Designation"),
             options: "Designation", change: () => this.refresh(),
@@ -497,23 +503,29 @@ class EmpCheckinPage {
             change: () => this.refresh(),
         });
 
-        this._init_mode = false;
-
         document.getElementById("ec-apply-btn").addEventListener("click", () => this.refresh());
         document.getElementById("ec-clear-btn").addEventListener("click", () => this._clear_filters());
+
+        return Promise.all(pending.map(p => Promise.resolve(p).catch(() => null)))
+            .then(() => { this._init_mode = false; });
     }
 
     _clear_filters() {
-        this.f_from.set_value(frappe.datetime.add_days(frappe.datetime.get_today(), -1));
-        this.f_to.set_value(frappe.datetime.get_today());
-        this.f_emp.set_value("");
-        this.f_company.set_value("");
-        this.f_branch.set_value("");
-        this.f_dept.set_value("");
-        this.f_desig.set_value("");
-        this.f_shift.set_value("");
-        this.f_log_type.set_value("");
-        this.refresh();
+        this._init_mode = true;
+        Promise.all([
+            this.f_from.set_value(frappe.datetime.add_days(frappe.datetime.get_today(), -1)),
+            this.f_to.set_value(frappe.datetime.get_today()),
+            this.f_emp.set_value(""),
+            this.f_company.set_value(""),
+            this.f_branch.set_value(""),
+            this.f_dept.set_value(EC_DEFAULT_DEPARTMENT),  // mandatory — reset to default
+            this.f_desig.set_value(""),
+            this.f_shift.set_value(""),
+            this.f_log_type.set_value(""),
+        ].map(p => Promise.resolve(p).catch(() => null))).then(() => {
+            this._init_mode = false;
+            this.refresh();
+        });
     }
 
     // ── Actions ─────────────────────────────────────────────────────────────
@@ -575,11 +587,39 @@ class EmpCheckinPage {
     }
 
     // ── Refresh — parallel calls ─────────────────────────────────────────────
+    // Debounced: several filter changes in a row trigger only one query
     refresh() {
         if (this._init_mode) return;
+        clearTimeout(this._refresh_timer);
+        this._refresh_timer = setTimeout(() => this._do_refresh(), 150);
+    }
+
+    _missing_mandatory(filters) {
+        const missing = [];
+        if (!filters.from_date)  missing.push(__("From Date"));
+        if (!filters.to_date)    missing.push(__("To Date"));
+        if (!filters.department) missing.push(__("Department"));
+        return missing;
+    }
+
+    _do_refresh() {
+        const filters = this._get_filters();
+        const reqId   = ++this._req_id;   // newer requests invalidate older ones
+
+        const missing = this._missing_mandatory(filters);
+        if (missing.length) {
+            this.data = []; this.absent = [];
+            $("#ec-summary-row").hide();
+            $("#ec-absent-body").html("");
+            $("#ec-body").html(`
+                <div class="ec-empty-state">
+                    <div class="ec-empty-icon">&#9888;</div>
+                    <div class="ec-empty-text">${__("Mandatory filters missing")}: ${missing.join(", ")}</div>
+                </div>`);
+            return;
+        }
 
         this._show_loading();
-        const filters = this._get_filters();
         const cacheKey = JSON.stringify(filters);
 
         // Serve from short-lived client cache (30 s) to avoid duplicate calls
@@ -607,6 +647,8 @@ class EmpCheckinPage {
                 error:    ()  => resolve([]),
             })),
         ]).then(([checkin, absent]) => {
+            // Ignore stale responses (e.g. an older query for a different department)
+            if (reqId !== this._req_id) return;
             this.data   = checkin;
             this.absent = absent;
             this._cache = { key: cacheKey, data: checkin, absent: absent, ts: Date.now() };
